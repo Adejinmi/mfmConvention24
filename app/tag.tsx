@@ -70,7 +70,7 @@ export default function Tag (props:TagProps ){
 
             </div>
             </div>
-            <button className="p-2 bg-green-500 text-white" onClick={event=>handlePrint()}>Print Tag</button>
+            <button className={`${props.display} p-2 bg-green-500 text-white`} onClick={event=>handlePrint()}>Print Tag</button>
         </>
         
     )
