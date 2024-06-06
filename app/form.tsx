@@ -134,7 +134,7 @@ export default function Form() {
               <option value="Guitar Choir">Guitar Choir</option>
               <option value="Youth Choir">Youth Choir</option>
               <option value="Teenage Choir">Teenage Choir</option>
-              <option value="Dance Group">Teenage Choir</option>
+              <option value="Dance Group">Dance Group</option>
               <option value="Others">Others</option>
             </select>
 
