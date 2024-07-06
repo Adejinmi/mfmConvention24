@@ -18,7 +18,7 @@ export interface formValues{
   
   }
 export default function Form() {
-    const initialValues:formValues = {
+     const initialValues:formValues = {
         fullname:'',
         phone:'',
         email:'',
@@ -36,7 +36,45 @@ export default function Form() {
 
       const [FormValues, setFormValues] = useState(initialValues)
       const [shouldTag, setShouldTag]=useState(false)
-
+      const states = [
+          "ABIA STATE",
+          "ADAMAWA STATE",
+          "AKWA IBOM STATE",
+          "ANAMBRA STATE",
+          "BAUCHI STATE",
+          "BAYELSA STATE",
+          "BENUE STATE",
+          "BORNO STATE",
+          "CROSS RIVER STATE",
+          "DELTA STATE",
+          "EBONYI STATE",
+          "EDO STATE",
+          "EKITI STATE",
+          "ENUGU STATE",
+          "GOMBE STATE",
+          "IMO STATE",
+          "JIGAWA STATE",
+          "KADUNA STATE",
+          "KANO STATE",
+          "KATSINA STATE",
+          "KEBBI STATE",
+          "KOGI STATE",
+          "KWARA STATE",
+          "LAGOS STATE",
+          "NASARAWA STATE",
+          "NIGER STATE",
+          "OGUN STATE",
+          "ONDO STATE",
+          "OSUN STATE",
+          "OYO STATE",
+          "PLATEAU STATE",
+          "RIVERS STATE",
+          "SOKOTO STATE",
+          "TARABA STATE",
+          "YOBE STATE",
+          "ZAMFARA STATE",
+          "F.C.T"
+      ]
       const [dataUri, setDataUri] = useState<{img: string|ArrayBuffer}>({img:''})
       
       let changeValue:(e:React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLSelectElement>, action:action["action"])=>void
@@ -88,7 +126,7 @@ export default function Form() {
     
     return(
       <>
-          <Header subtitle="Registration for Music Ministry" display={shouldTag ? 'hidden' : ''} />  
+          <Header subtitle="Registration" display={shouldTag ? 'hidden' : ''} />  
           <form className={`w-full px-2 md:px-10 ${shouldTag ? 'hidden' : ''}`}>
             <label htmlFor="fullname">Full name</label>
             <input id="fullname" name="fullname" type="text" value={FormValues.fullname} onChange={event=>changeValue(event, 'fullname')}/>
@@ -123,8 +161,12 @@ export default function Form() {
             <input id="part" name="part" type="text" value={FormValues.part} onChange={event=>changeValue(event, 'part')}/>
 
             <label htmlFor="state">State</label>
-            <input id="state" name="state" type="text" value={FormValues.state} onChange={event=>changeValue(event, 'state')}/>
-
+            <select id="state" name="state" value={FormValues.state} onChange={event=>changeValue(event, 'state')}>
+              <option value="">Select an option</option>
+              {states.map((state)=>{
+                return <option key={state} value={state}>{state}</option>
+              })}
+            </select>
             <label htmlFor="unit">Unit</label>
             <select id="unit" name="unit" value={FormValues.unit} onChange={event=>changeValue(event, 'unit')}>
             <option value="">Select an Option</option>
@@ -143,7 +185,7 @@ export default function Form() {
             </div>
           </form>
 
-          <Tag form={FormValues} dataUri={dataUri} display={shouldTag ? '' : 'hidden'} />
+          <Tag form={FormValues} dataUri={dataUri} display={shouldTag ? '' : 'hidden'} setShouldTag={setShouldTag} setFormValues={setFormValues}/>
       
       </>
     )

@@ -10,7 +10,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "MFM Convention 2024",
-  description: "Registration for Mountain of Fire and Miracles Ministries Convention, 2024",
+  description: "Registration for Music Ministry, 2024",
 };
 
 export default function RootLayout({

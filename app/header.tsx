@@ -11,7 +11,7 @@ export default function Header(props:HeaderProps){
         <div className={`text-center w-full grid grid-cols-6 ${props.display}`}>
           <Image src={'/mfm.png'} alt="MFM-Logo" width={130} height={130} />
           <div className="col-span-5">
-            <h1 className="text-center text-3xl">MOUNTAIN OF FIRE AND MIRACLES MINISTRIES</h1>
+            <h1 className="text-center text-3xl">MFM MUSIC MINISTRY</h1>
             <h1 className="text-2xl">2024 Convention</h1>
             {props.subtitle ? <h1 className="text-2xl">{props.subtitle}</h1> : ''}
           </div>
