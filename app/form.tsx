@@ -113,7 +113,7 @@ export default function Form() {
 
       const submitForm = ()=>{
        
-          if (FormValues.email==='' ||FormValues.fullname==='' ||FormValues.gender==='' ||FormValues.instrument==='' ||FormValues.megaregion==='' ||FormValues.part==='' ||FormValues.phone==='' ||FormValues.region==='' ||FormValues.state==='' || FormValues.unit===''){
+          /* if (FormValues.email==='' ||FormValues.fullname==='' ||FormValues.gender==='' ||FormValues.instrument==='' ||FormValues.megaregion==='' ||FormValues.part==='' ||FormValues.phone==='' ||FormValues.region==='' ||FormValues.state==='' || FormValues.unit===''){
             return alert("All input fields are required")
           }
           else{
@@ -158,7 +158,7 @@ export default function Form() {
               })
               .catch((error) => console.log(error));
             }
-          } 
+          }  */
         
       }
 
