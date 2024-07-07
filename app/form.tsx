@@ -114,10 +114,14 @@ export default function Form() {
       const submitForm = ()=>{
        
            if (FormValues.email==='' ||FormValues.fullname==='' ||FormValues.gender==='' ||FormValues.instrument==='' ||FormValues.megaregion==='' ||FormValues.part==='' ||FormValues.phone==='' ||FormValues.region==='' ||FormValues.state==='' || FormValues.unit===''){
-            return alert("All input fields are required")
+             setShouldDisable(false);
+             setSubmitValue("Register")
+             return alert("All input fields are required")
           }
           else{
             if (dataUri.img==='') {
+              setShouldDisable(false);
+              setSubmitValue("Register")
               return alert("Upload a valid passport photograph")
             } else {
               fetch(`/api/register`,{
