@@ -34,9 +34,6 @@ input[type=text], input[type=email], select{
   @apply border-gray-300 p-2 border rounded-sm w-full
 }
 
-input[type=submit]{
-  @apply cursor-pointer bg-green-600 p-3 text-white my-4 text-center 
-}
 
 .title{
   @apply text-xs text-gray-700

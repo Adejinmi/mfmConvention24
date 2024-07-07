@@ -14,6 +14,8 @@ type TagProps = {
     display:string
     setShouldTag:React.Dispatch<React.SetStateAction<boolean>>
     setFormValues:React.Dispatch<React.SetStateAction<formValues>>
+    setShouldDisable:React.Dispatch<React.SetStateAction<boolean>>
+    setSubmitValue:React.Dispatch<React.SetStateAction<string>>
 }
 
 
@@ -36,15 +38,18 @@ export default function Tag (props:TagProps ){
                 part:'',
                 instrument:'',
                 unit:'',
+                tagnumber:''
               }
             props.setFormValues(initialValues)
+            props.setShouldDisable(false);
+            props.setSubmitValue("Register")
            props.setShouldTag(false)
         }
     
     return(
         <>
             <div ref={myref} className={`bg-mfm bg-no-repeat bg-contain bg-center ${props.display} w-4/5`}>
-            <div className={`w-full grid grid-cols-3 h-96 p-5 bg-white bg-opacity-95`}>
+            <div className={`w-full grid grid-cols-3 h-96 p-5 bg-white bg-opacity-90`}>
                 
                 <div className="col-span-2 content-center">
                     <h1 className="text-9xl text-gray-600 font-bold">MUSIC</h1>
@@ -79,9 +84,14 @@ export default function Tag (props:TagProps ){
                     <p className="subtitle">{props.form.gender}</p>
                 </div>
 
-                <div className="col-span-2">
+                <div>
                     <p className="title">Unit</p>
                     <p className="subtitle">{props.form.unit}</p>
+                </div>
+
+                <div>
+                    <p className="title">Tag Number</p>
+                    <p className="subtitle">{props.form.tagnumber}</p>
                 </div>
                 
                 <div>

@@ -1,8 +1,9 @@
 "use client"
 
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import Header from "./header";
 import Tag from "./tag";
+import { Audio } from 'react-loader-spinner'
 
 export interface formValues{
     fullname: string;
@@ -15,7 +16,7 @@ export interface formValues{
     part:string;
     instrument:string;
     unit:string;
-  
+    tagnumber:string;
   }
 export default function Form() {
      const initialValues:formValues = {
@@ -29,6 +30,7 @@ export default function Form() {
         part:'',
         instrument:'',
         unit:'',
+        tagnumber:''
       }
     type action={
         action: 'fullname' | 'phone' |'email' | 'gender' | 'state' | 'megaregion' | 'region' | 'part' | 'instrument' | 'unit'; 
@@ -36,6 +38,8 @@ export default function Form() {
 
       const [FormValues, setFormValues] = useState(initialValues)
       const [shouldTag, setShouldTag]=useState(false)
+      const [submitValue, setSubmitValue] = useState("Register")
+      const [shouldDisable, setShouldDisable] = useState(false)
       const states = [
           "ABIA STATE",
           "ADAMAWA STATE",
@@ -73,7 +77,8 @@ export default function Form() {
           "TARABA STATE",
           "YOBE STATE",
           "ZAMFARA STATE",
-          "F.C.T"
+          "F.C.T",
+          "OUTSIDE NIGERIA"
       ]
       const [dataUri, setDataUri] = useState<{img: string|ArrayBuffer}>({img:''})
       
@@ -116,7 +121,43 @@ export default function Form() {
             if (dataUri.img==='') {
               return alert("Upload a valid passport photograph")
             } else {
-              setShouldTag(true)
+              fetch(`/api/register`,{
+                method:"POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(FormValues),
+              })
+              .then((res) => res.json())
+              .then((data) => {
+                let values = data.data
+                let { email,       
+                name,        
+                phone,       
+                gender,      
+                state,       
+                megaregion,  
+                region,      
+                part,        
+                instrument,  
+                unit,        
+                tagnumber } = values
+                let fullname=name
+                let tagValues = {email, fullname, phone, gender, state, megaregion,region, part, instrument,unit, tagnumber}
+                if(data.message==="Successful"){
+                  setFormValues(tagValues)
+                  setShouldTag(true)
+                }else if(data.message==="Duplicate"){
+                  alert("Your email and phone number have been used. You are only allowed one registration");
+                  setShouldDisable(false);
+                  setSubmitValue("Register")
+                }else{
+                  alert(`Something went wrong try again`)
+                  setShouldDisable(false);
+                  setSubmitValue("Register")
+                }
+              })
+              .catch((error) => console.log(error));
             }
           } 
         
@@ -181,11 +222,11 @@ export default function Form() {
             </select>
 
             <div className="text-center">
-              <input type="submit" value="Register" onClick={event=>{event.preventDefault(); submitForm()}} />
+              <input className={shouldDisable ? "cursor-pointer bg-gray-600 p-3 text-white my-4 text-center": "cursor-pointer bg-green-600 p-3 text-white my-4 text-center"} type="submit" disabled={shouldDisable} value={submitValue} onClick={event=>{event.preventDefault(); setSubmitValue('Processing...'); setShouldDisable(true); submitForm()}} />
             </div>
           </form>
 
-          <Tag form={FormValues} dataUri={dataUri} display={shouldTag ? '' : 'hidden'} setShouldTag={setShouldTag} setFormValues={setFormValues}/>
+          <Tag form={FormValues} dataUri={dataUri} display={shouldTag ? '' : 'hidden'} setShouldTag={setShouldTag} setFormValues={setFormValues} setShouldDisable={setShouldDisable} setSubmitValue={setSubmitValue}/>
       
       </>
     )
